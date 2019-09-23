@@ -15,7 +15,7 @@ def main(argv):
     filelength = Lib.readTextTCP(clientSocket)
     print "fil length er, {}" .format(filelength)
 
-    chunks = math.ceil(fileSize/BUFSIZE)
+    chunks = math.ceil(filelength/BUFSIZE)
     for i in range(chunks):
         content = clientSocket.recv(BUFSIZE)
         
