@@ -10,8 +10,8 @@ def main(argv):
     clientSocket = socket(AF_INET, SOCK_STREAM)
     clientSocket.connect(('10.0.0.1', PORT))
     sentence = raw_input("Input lowercase sentence:")
-    writeTextTCP(sentence, clientSocket)
-    filelength = readTextTCP(clientSocket)
+    Lib.writeTextTCP(sentence, clientSocket)
+    filelength = Lib.readTextTCP(clientSocket)
     print "fil length er, {}" .format(filelength)
 
     chunks = math.ceil(fileSize/BUFSIZE)
