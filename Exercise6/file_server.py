@@ -16,7 +16,8 @@ def main(argv):
     while 1:
         connectionSocket, addr = serverSocket.accept()
         file = Lib.readTextTCP(connectionSocket)
-        size = Lib.check_File_Exists(file)
+        filename = Lib.extractFilename(file)
+        size = str(Lib.check_File_Exists(filename))
         Lib.writeTextTCP(size, connectionSocket)
         connectionSocket.close()
     
