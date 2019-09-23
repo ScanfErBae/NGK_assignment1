@@ -12,7 +12,7 @@ def main(argv):
     clientSocket.connect(('10.0.0.1', PORT))
     sentence = raw_input("Input lowercase sentence:")
     Lib.writeTextTCP(sentence, clientSocket)
-    filelength = Lib.readTextTCP(clientSocket)
+    filelength = int('Lib.readTextTCP(clientSocket)')
     print "fil length er, {}" .format(filelength)
 
     chunks = math.ceil(filelength/BUFSIZE)
