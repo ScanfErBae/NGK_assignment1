@@ -8,6 +8,20 @@ BUFSIZE = 1000
 
 def main(argv):
 	# TO DO Your Code
+	serverSocket = socket(AF_INET,SOCK_STREAM)
+    serverSocket.bind((HOST,PORT))
+    serverSocket.listen(1)
+    print 'The server is ready to receive'
+    
+    while 1:
+        connectionSocket, addr = serverSocket.accept()
+        file = readTextTCP(connectionSocket)
+        size = check_File_Exists(file)
+        writeTextTCP(size, connectionSocket)
+        connectionSocket.close()
+    
+    
+
 
 def sendFile(fileName,  fileSize,  conn):
 	# TO DO Your Code
