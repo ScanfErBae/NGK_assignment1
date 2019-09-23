@@ -1,15 +1,15 @@
 import sys
 import socket
 from lib import Lib
-
+from socket import *
 HOST = ''
 PORT = 9000
 BUFSIZE = 1000
 
 def main(argv):
 	# TO DO Your Code
-	serverSocket = socket(AF_INET,SOCK_STREAM)
-    serverSocket.bind((HOST,PORT))
+    serverSocket = socket(AF_INET,SOCK_STREAM)
+    serverSocket.bind(('', PORT))
     serverSocket.listen(1)
     print 'The server is ready to receive'
     
@@ -24,7 +24,8 @@ def main(argv):
 
 
 def sendFile(fileName,  fileSize,  conn):
+    pass
 	# TO DO Your Code
     
 if __name__ == "__main__":
-   main(sys.argv[1:])
+    main(sys.argv[1:])
