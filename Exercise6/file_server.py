@@ -21,23 +21,19 @@ def main(argv):
         filename = Lib.extractFilename(file)
         #f = open(filename, "rb")
         size = str(Lib.check_File_Exists(filename))
-        Lib.writeTextTCP(size, connectionSocket)
-        filesize = int(size)
-        chunks = int(math.ceil(filesize/BUFSIZE))
-        with open(filename, 'rb') as f:
-            dataToSend = str(f.read(BUFSIZE))
-            Lib.writeTextTCP(dataToSend, connectionSocket)
-        #for i in range (0, chunks):
-           # dataToSend = unicode(f.read(BUFSIZE), "UTF-8")
-         #   Lib.writeTextTCP(dataToSend, connectionSocket)
-        connectionSocket.close()
-        f.close()
+        sendFile(filename, size, connectionSocket)
+        
     serverSocket.close()
                    
 
 def sendFile(fileName,  fileSize,  conn):
-    pass
-	# TO DO Your Code
+    Lib.writeTextTCP(fileSize, conn)
+    filesize = int(fileSize)
+    chunks = int(math.ceil(filesize/BUFSIZE))
+    with open(fileName, "rb") as f:
+        conn.send(f.read())
+    conn.close()
+    f.close()
     
 if __name__ == "__main__":
     main(sys.argv[1:])

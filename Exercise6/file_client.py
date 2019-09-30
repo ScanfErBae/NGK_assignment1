@@ -11,27 +11,26 @@ def main(argv):
     clientSocket = socket(AF_INET, SOCK_STREAM)
     clientSocket.connect(('10.0.0.1', PORT))
     sentence = raw_input("Input lowercase sentence:")
-    Lib.writeTextTCP(sentence, clientSocket)
-    filelength = float('Lib.readTextTCP(clientSocket)')
-    print "fil length er, {}" .format(filelength)
-
-    chunks = math.ceil(filelength/BUFSIZE)
-    for i in range(chunks):
-        content = clientSocket.recv(BUFSIZE)
-        
-        container.write(content)
-        print 'Received a package'
-
-    print 'Done downloading'
-    container.close
+    receiveFile(sentence, clientSocket)
     clientSocket.close()
     
     
 
     
 def receiveFile(fileName,  conn):
-    pass
-	# TO DO Your Code
+    Lib.writeTextTCP(fileName, conn)
+    filelength = int(float(Lib.readTextTCP(conn)))
+    print "fil length er {}" .format(filelength)
+
+    chunks = int((filelength//BUFSIZE)+1)
+    f = open("billede.jpg", "wb")
+    for i in range(0, chunks):
+        content = conn.recv(BUFSIZE)
+        f.write(content)
+        print 'Received a package'
+
+    print 'Done downloading'
+    f.close
 
 
 if __name__ == "__main__":
