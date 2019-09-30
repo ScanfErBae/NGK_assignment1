@@ -1,6 +1,5 @@
 import sys
 import socket
-from lib import Lib
 from socket import *
 
 HOST = ''
@@ -15,16 +14,14 @@ def main(argv):
     
     while 1:
         message, clientAddress = serverSocket.recvfrom(2048)
-        if message == ('u'or 'U')
+        if message in ('u', 'U'):
             filename = Lib.extractFilename('/proc/uptime')
             size = str(Lib.check_File_Exists(filename))
             sendFile(filename, size, serverSocket)
-        else if message == ('l' or 'L')
+        if message in ('l', 'L'):
             filename = Lib.extractFilename('/proc/loadavg')
             size = str(Lib.check_File_Exists(filename))
             sendFile(filename, size, serverSocket)
-        else 
-            break
         
     serverSocket.close()
                    

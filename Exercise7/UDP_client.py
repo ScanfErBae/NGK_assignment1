@@ -1,14 +1,12 @@
 import sys
 from socket import *
-from lib import Lib
-import math
 
 PORT = 9000
 BUFSIZE = 1000
 
 def main(argv):
 	# TO DO Your Code
-    clientSocket = socket(socket.AF_INET, socket.SOCK_DGRAM)
+    clientSocket = socket(AF_INET, SOCK_DGRAM)
     sentence = raw_input("Input l or u")
     clientSocket.sendto(message, ('10.0.0.1', PORT))
 
