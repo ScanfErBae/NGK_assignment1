@@ -19,7 +19,6 @@ def main(argv):
         connectionSocket, addr = serverSocket.accept()
         file = Lib.readTextTCP(connectionSocket)
         filename = Lib.extractFilename(file)
-        #f = open(filename, "rb")
         size = str(Lib.check_File_Exists(filename))
         sendFile(filename, size, connectionSocket)
         
@@ -28,8 +27,6 @@ def main(argv):
 
 def sendFile(fileName,  fileSize,  conn):
     Lib.writeTextTCP(fileSize, conn)
-    filesize = int(fileSize)
-    chunks = int(math.ceil(filesize/BUFSIZE))
     with open(fileName, "rb") as f:
         conn.send(f.read())
     conn.close()
