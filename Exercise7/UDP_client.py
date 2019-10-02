@@ -15,25 +15,6 @@ def main(argv):
         print modifiedMessage
 
     clientSocket.close()
-    
-    
-
-    
-def receiveFile(fileName,  conn):
-    Lib.writeTextTCP(fileName, conn)
-    filelength = int(float(Lib.readTextTCP(conn)))
-    print "fil length er {}" .format(filelength)
-
-    chunks = int((filelength//BUFSIZE)+1)
-    f = open("billede.jpg", "wb")
-    for i in range(0, chunks):
-        content = conn.recv(BUFSIZE)
-        f.write(content)
-        print 'Received a package'
-
-    print 'Done downloading'
-    f.close
-
 
 if __name__ == "__main__":
     main(sys.argv[1:])
