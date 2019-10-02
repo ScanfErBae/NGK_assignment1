@@ -10,16 +10,17 @@ BUFSIZE = 1000
 def main(argv):
 	# TO DO Your Code
     serverSocket = socket(AF_INET,SOCK_DGRAM)
-    serverSocket.bind(('', PORT))
+    serverSocket.bind((HOST, PORT))
     print 'The server is ready to receive'
     
     while 1:
         message, clientAddress = serverSocket.recvfrom(2048)
         print message
         if message in ('u', 'U'):
-            serverSocket.sendto ('/proc/uptime', ('', PORT))
+            #serverSocket.sendto ('/proc/uptime', (HOST, PORT))
             with open('/proc/uptime', "rb") as f:
-                serverSocket.sendto(f.read(), ('', PORT))
+                data = f.read()
+                serverSocket.sendto(data, clientAddress)
             f.close()
                 
                 
@@ -27,9 +28,10 @@ def main(argv):
             #size = str(Lib.check_File_Exists(filename))
             #sendFile(filename, size, serverSocket)
         if message in ('l', 'L'):
-            serverSocket.sendto ('/proc/loadavg', ('', PORT))
+            #serverSocket.sendto ('/proc/loadavg', (HOST, PORT))
             with open('/proc/loadavg', "rb") as f:
-                serverSocket.sendto(f.read(), ('', PORT))
+                data = f.read()
+                serverSocket.sendto(data, clientAddress)
             f.close()
             
             #filename = Lib.extractFilename('/proc/loadavg')
